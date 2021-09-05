@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cel.CelestialMechanics.Domain\Cel.CelestialMechanics.Domain.csproj" />
+    <ProjectReference Include="..\Cel.CelestialMechanics.Services\Cel.CelestialMechanics.Services.csproj" />
+  </ItemGroup>
+
+
+</Project>

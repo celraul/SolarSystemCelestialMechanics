@@ -1,0 +1,17 @@
+<div>
+
+    <h1>Login</h1>
+
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin(formLogin.value)">
+
+        <label>Login</label>
+        <input type="text" formControlName="login" maxlength="100" />
+
+        <label>Password</label>
+        <input type="password" formControlName="password" maxlength="50" />
+
+        <button type="submit">Login</button>
+
+    </form>
+
+</div>
