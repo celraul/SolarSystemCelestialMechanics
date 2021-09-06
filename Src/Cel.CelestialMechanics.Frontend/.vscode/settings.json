@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/ccb5a18f-5268-49db-a20a-ec558162b869/resourceGroups/Astro/providers/Microsoft.Web/sites/SolarSystemCelestialMechanics-Web",
+    "appService.deploySubpath": "dist"
+}
