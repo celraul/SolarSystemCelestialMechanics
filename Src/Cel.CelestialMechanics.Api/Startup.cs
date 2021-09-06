@@ -36,9 +36,10 @@ namespace Cel.CelestialMechanics.Api
 
             app.UseCors(options =>
             {
-                options.WithOrigins(Configuration.GetSection("Frontend:Endpoint").Value).AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+                options.AllowAnyOrigin();
+                //options.WithOrigins(Configuration.GetSection("Frontend:Endpoint").Value).AllowAnyMethod()
+                //.AllowAnyHeader()
+                //.AllowCredentials();
             });
 
             app.UseHttpsRedirection();
