@@ -41,6 +41,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
 
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
+
             return planeta;
         }
 
@@ -60,6 +66,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaExcentrica();
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
+
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
 
             return planeta;
         }
@@ -81,6 +93,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
 
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
+
             return planeta;
         }
 
@@ -100,6 +118,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaExcentrica();
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
+
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
 
             return planeta;
         }
@@ -121,6 +145,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
 
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
+
             return planeta;
         }
 
@@ -140,6 +170,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaExcentrica();
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
+
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
 
             return planeta;
         }
@@ -161,6 +197,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
 
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
+
             return planeta;
         }
 
@@ -180,6 +222,12 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularAnomaliaExcentrica();
             planeta.CalcularAnomaliaVerdadeira();
             planeta.CalcularDistanciaPlanetaSol();
+
+            planeta.calcularCoordenadaX();
+            planeta.calcularCoordenadaY();
+            planeta.calcularCoordenadaZ();
+            planeta.calcularCoordenadaLambda();
+            planeta.calcularCoordenadaBeta();
 
             return planeta;
         }

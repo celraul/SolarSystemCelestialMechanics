@@ -125,5 +125,36 @@ namespace Cel.CelestialMechanics.Domain.Entities
                 / (1 + ExcentricidadeOrbita * Math.Cos(AnomaliaVerdadeira));
         }
 
+        public void calcularCoordenadaX()
+        {
+            CoordenadaX = DistanciaPlanetaSol *
+               ((Math.Cos(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira))
+                - (Math.Sin(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
+                * Math.Cos(InclinacaoPlanoOrbitalTerra)));
+        }
+
+        public void calcularCoordenadaY()
+        {
+            CoordenadaY = DistanciaPlanetaSol *
+                ((Math.Sin(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira))
+                - (Math.Cos(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
+                * Math.Cos(InclinacaoPlanoOrbitalTerra)));
+        }
+
+        public void calcularCoordenadaZ()
+        {
+            CoordenadaZ = DistanciaPlanetaSol * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Sin(InclinacaoPlanoOrbitalTerra);
+        }
+
+        public void calcularCoordenadaLambda()
+        {
+            CoordenadaLambda = CoordenadaY / CoordenadaX;
+        }
+
+        public void calcularCoordenadaBeta()
+        {
+            CoordenadaBeta = CoordenadaZ /
+                Math.Sqrt(Math.Pow(CoordenadaX, 2) + Math.Pow(CoordenadaY, 2));
+        }
     }
 }
