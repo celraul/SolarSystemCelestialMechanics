@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cel.CelestialMechanics.Domain.Extensions;
+using System;
 using System.Diagnostics;
 
 namespace Cel.CelestialMechanics.Domain.Entities
@@ -36,6 +37,11 @@ namespace Cel.CelestialMechanics.Domain.Entities
         /// (M) Anomalia média - Em graus
         /// </summary>
         public double AnomaliaMedia { get; private set; }
+        /// <summary>
+        /// (M) Anomalia média - Em radianos
+        /// </summary>
+        public double AnomaliaMediaRad { get; private set; }
+
         /// <summary>
         /// (E) Cálculo da anomalia Excêntrica - Em graus
         /// </summary>
@@ -90,11 +96,33 @@ namespace Cel.CelestialMechanics.Domain.Entities
             => ExcentricidadeOrbita = angulo + (p2 * Tempo);
 
         public void CalcularAnomaliaMedia(double angulo, double angulo2)
-            => AnomaliaMedia = angulo + (angulo2 * Tempo);
-
-        public void CalularAnomaliaExcentrica()
         {
+            AnomaliaMedia = angulo + (angulo2 * Tempo);
+            AnomaliaMediaRad = AnomaliaMedia.ToRad();
+        }
 
+        public void CalcularAnomaliaExcentrica()
+        {
+            // M = E − e sin E
+            var E = AnomaliaMediaRad;
+            var deltaE = (AnomaliaMediaRad - E) + ExcentricidadeOrbita * Math.Sin(E)
+                / 1 - (ExcentricidadeOrbita * Math.Cos(E));
+
+            AnomaliaExentrica = E + deltaE;
+        }
+
+        public void CalcularAnomaliaVerdadeira()
+        {
+            //
+            var part1 = (1 + ExcentricidadeOrbita) / (1 - ExcentricidadeOrbita);
+            var part2 = Math.Sqrt(part1) * Math.Tan(AnomaliaExentrica / 2);
+            AnomaliaVerdadeira = Math.Atan(part2) * 2;
+        }
+
+        public void CalcularDistanciaPlanetaSol()
+        {
+            DistanciaPlanetaSol = SemiEixoMaiorOrbita * (1 - Math.Pow(ExcentricidadeOrbita, 2))
+                / (1 + ExcentricidadeOrbita * Math.Cos(AnomaliaVerdadeira));
         }
 
     }

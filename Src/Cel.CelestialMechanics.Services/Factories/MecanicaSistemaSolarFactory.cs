@@ -36,6 +36,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularSemiEixoMaiorOrbita(0.387098);
             planeta.CalcularExcentricidadeDaOrbita(0.205635, 5.59 * Math.Pow(10, -10));
             planeta.CalcularAnomaliaMedia(168.6562, 4.0923344368);
+            
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
 
             return planeta;
         }
@@ -53,6 +57,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularExcentricidadeDaOrbita(0.006773, 1.302 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(48.0052, 1.6021302244);
 
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
+
             return planeta;
         }
 
@@ -68,6 +76,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularSemiEixoMaiorOrbita(1.0);
             planeta.CalcularExcentricidadeDaOrbita(0.016709, 1.0151 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(356.0470, 0.9856002585);
+
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
 
             return planeta;
         }
@@ -85,6 +97,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularExcentricidadeDaOrbita(0.093405, 2.516 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(18.6021, 0.5240207766);
 
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
+
             return planeta;
         }
 
@@ -100,6 +116,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularSemiEixoMaiorOrbita(5.20256);
             planeta.CalcularExcentricidadeDaOrbita(0.048498, 4.469 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(19.8950, 0.0830853001);
+
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
 
             return planeta;
         }
@@ -117,6 +137,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularExcentricidadeDaOrbita(0.055546, 9.499 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(316.9670, 0.0334442282);
 
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
+
             return planeta;
         }
 
@@ -133,6 +157,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularExcentricidadeDaOrbita(0.047318, 7.45 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(142.5905, 0.011725806);
 
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
+
             return planeta;
         }
 
@@ -148,6 +176,10 @@ namespace Cel.CelestialMechanics.Services.Factories
             planeta.CalcularSemiEixoMaiorOrbita(30.05826 + ((3.313 * Math.Pow(10, -8)) * planeta.Tempo)); // calculo diferente
             planeta.CalcularExcentricidadeDaOrbita(0.008606, 2.15 * Math.Pow(10, -9));
             planeta.CalcularAnomaliaMedia(260.2471, 0.005995147);
+
+            planeta.CalcularAnomaliaExcentrica();
+            planeta.CalcularAnomaliaVerdadeira();
+            planeta.CalcularDistanciaPlanetaSol();
 
             return planeta;
         }
