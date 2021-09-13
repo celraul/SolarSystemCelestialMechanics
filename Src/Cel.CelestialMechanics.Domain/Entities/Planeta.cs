@@ -98,7 +98,7 @@ namespace Cel.CelestialMechanics.Domain.Entities
         public void CalcularAnomaliaMedia(double angulo, double angulo2)
         {
             AnomaliaMedia = angulo + (angulo2 * Tempo);
-            AnomaliaMediaRad = AnomaliaMedia.ToRad();
+            AnomaliaMediaRad = AnomaliaMedia.GrausToRad();
         }
 
         public void CalcularAnomaliaExcentrica()
@@ -125,36 +125,43 @@ namespace Cel.CelestialMechanics.Domain.Entities
                 / (1 + ExcentricidadeOrbita * Math.Cos(AnomaliaVerdadeira));
         }
 
-        public void calcularCoordenadaX()
+        public void CalcularCoordenadaX()
         {
-            CoordenadaX = DistanciaPlanetaSol *
-               ((Math.Cos(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira))
-                - (Math.Sin(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
-                * Math.Cos(InclinacaoPlanoOrbitalTerra)));
+            var part1 = Math.Cos(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira);
+            var part2 = Math.Sin(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Cos(InclinacaoPlanoOrbitalTerra);
+
+            CoordenadaX = DistanciaPlanetaSol.UaToKm() * (part1 - part2);
         }
 
-        public void calcularCoordenadaY()
+        public void CalcularCoordenadaY()
         {
-            CoordenadaY = DistanciaPlanetaSol *
-                ((Math.Sin(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira))
-                - (Math.Cos(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
-                * Math.Cos(InclinacaoPlanoOrbitalTerra)));
+            var part1 = Math.Sin(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira);
+            var part2 = Math.Cos(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Cos(InclinacaoPlanoOrbitalTerra);
+
+            CoordenadaY = DistanciaPlanetaSol.UaToKm() * (part1 + part2);
         }
 
         public void calcularCoordenadaZ()
         {
-            CoordenadaZ = DistanciaPlanetaSol * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Sin(InclinacaoPlanoOrbitalTerra);
+            CoordenadaZ = DistanciaPlanetaSol.UaToKm() * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Sin(InclinacaoPlanoOrbitalTerra);
         }
 
-        public void calcularCoordenadaLambda()
+        public void CalcularCoordenadaLambda()
         {
-            CoordenadaLambda = CoordenadaY / CoordenadaX;
+            // TODO verificar se é necessária essa conversão
+            CoordenadaLambda = (Math.Atan(CoordenadaY / CoordenadaX)).RadToGraus();
+            if (CoordenadaLambda < 0)
+                CoordenadaLambda += 360;
         }
 
-        public void calcularCoordenadaBeta()
+        public void CalcularCoordenadaBeta()
         {
-            CoordenadaBeta = CoordenadaZ /
-                Math.Sqrt(Math.Pow(CoordenadaX, 2) + Math.Pow(CoordenadaY, 2));
+            var value = Math.Atan(CoordenadaZ /
+                Math.Sqrt(Math.Pow(CoordenadaX, 2) + Math.Pow(CoordenadaY, 2)));
+
+
+            // TODO verificar se é necessária essa conversão 
+            CoordenadaBeta = value.RadToGraus();
         }
     }
 }
