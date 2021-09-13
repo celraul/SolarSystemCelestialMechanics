@@ -43,5 +43,17 @@ namespace Cel.CelestialMechanics.Test
             Assert.AreEqual(149597870.7, 1d.UaToKm());
             Assert.AreEqual(299195741.4, 2d.UaToKm());
         }
+
+        [Test]
+        public void AngulosCorrespondentes()
+        {
+            Assert.AreEqual(360d, 360d.AngulosCorrespondentes());
+            Assert.AreEqual(10d, 10d.AngulosCorrespondentes());
+
+            Assert.AreEqual(60d, Math.Ceiling(780d.AngulosCorrespondentes()));
+            Assert.AreEqual(225d, Math.Ceiling(1305d.AngulosCorrespondentes()));
+            Assert.AreEqual(180d, Math.Ceiling(2340d.AngulosCorrespondentes()));
+            Assert.AreEqual(240d, Math.Ceiling(1320d.AngulosCorrespondentes()));
+        }
     }
 }

@@ -25,5 +25,14 @@ namespace Cel.CelestialMechanics.Domain.Extensions
             var ua = 149597870.7;
             return value * ua;
         }
+
+        public static double AngulosCorrespondentes(this double value)
+        {
+            if (value <= 360)
+                return value;
+
+            var voltas = value / 360;
+            return (voltas - Math.Floor(voltas)) * 360;
+        }
     }
 }

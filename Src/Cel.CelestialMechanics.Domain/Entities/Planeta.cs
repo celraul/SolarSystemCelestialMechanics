@@ -77,7 +77,8 @@ namespace Cel.CelestialMechanics.Domain.Entities
             double parte2 = Math.Floor((7 * (ano + Math.Floor((mes + 9d) / 12))) / 4);
             double parte3 = Math.Floor((275d * mes) / 9d);
 
-            Tempo = parte1 - parte2 + parte3 + dia - 730530;
+            Tempo = (parte1 - parte2 + parte3 + dia - 730530)
+                + (data.Hour / 24) + (data.Minute / 1440);
         }
 
         public void CalcularLongitudeDoNodoAscendente(double angulo, double p2)
@@ -97,7 +98,8 @@ namespace Cel.CelestialMechanics.Domain.Entities
 
         public void CalcularAnomaliaMedia(double angulo, double angulo2)
         {
-            AnomaliaMedia = angulo + (angulo2 * Tempo);
+            AnomaliaMedia = (angulo + (angulo2 * Tempo)).AngulosCorrespondentes();
+
             AnomaliaMediaRad = AnomaliaMedia.GrausToRad();
         }
 
