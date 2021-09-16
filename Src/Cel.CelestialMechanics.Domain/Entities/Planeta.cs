@@ -12,7 +12,6 @@ namespace Cel.CelestialMechanics.Domain.Entities
         /// 
         /// </summary>
         public double Tempo { get; private set; }
-
         /// <summary>
         /// (Ω) Longitude do nodo ascendente - Em graus
         /// </summary>
@@ -41,7 +40,6 @@ namespace Cel.CelestialMechanics.Domain.Entities
         /// (M) Anomalia média - Em radianos
         /// </summary>
         public double AnomaliaMediaRad { get; private set; }
-
         /// <summary>
         /// (E) Cálculo da anomalia Excêntrica - Em graus
         /// </summary>
@@ -55,7 +53,6 @@ namespace Cel.CelestialMechanics.Domain.Entities
         /// </summary>
         public double DistanciaPlanetaSol { get; private set; }
 
-        // Coordenadas
         public double CoordenadaX { get; private set; }
         public double CoordenadaY { get; private set; }
         public double CoordenadaZ { get; private set; }
@@ -88,10 +85,10 @@ namespace Cel.CelestialMechanics.Domain.Entities
              => InclinacaoPlanoOrbitalTerra = angulo + (p2 * Tempo);
 
         public void CalcularArgumentoPerielio(double angulo, double p2)
-            => ArgumentoPerielio = (angulo + p2) * Tempo;
+            => ArgumentoPerielio = (angulo + (p2 * Tempo)).AngulosCorrespondentes();
 
         public void CalcularSemiEixoMaiorOrbita(double distancia)
-          => SemiEixoMaiorOrbita = distancia; // (au)
+          => SemiEixoMaiorOrbita = distancia;
 
         public void CalcularExcentricidadeDaOrbita(double angulo, double p2)
             => ExcentricidadeOrbita = angulo + (p2 * Tempo);
@@ -99,23 +96,20 @@ namespace Cel.CelestialMechanics.Domain.Entities
         public void CalcularAnomaliaMedia(double angulo, double angulo2)
         {
             AnomaliaMedia = (angulo + (angulo2 * Tempo)).AngulosCorrespondentes();
-
             AnomaliaMediaRad = AnomaliaMedia.GrausToRad();
         }
 
         public void CalcularAnomaliaExcentrica()
         {
-            // M = E − e sin E
-            var E = AnomaliaMediaRad;
-            var deltaE = (AnomaliaMediaRad - E) + ExcentricidadeOrbita * Math.Sin(E)
-                / 1 - (ExcentricidadeOrbita * Math.Cos(E));
+            var e = AnomaliaMediaRad;
+            var deltaE = (AnomaliaMediaRad - e) + ExcentricidadeOrbita * Math.Sin(e)
+                / 1 - (ExcentricidadeOrbita * Math.Cos(e));
 
-            AnomaliaExentrica = E + deltaE;
+            AnomaliaExentrica = e + deltaE;
         }
 
         public void CalcularAnomaliaVerdadeira()
         {
-            //
             var part1 = (1 + ExcentricidadeOrbita) / (1 - ExcentricidadeOrbita);
             var part2 = Math.Sqrt(part1) * Math.Tan(AnomaliaExentrica / 2);
             AnomaliaVerdadeira = Math.Atan(part2) * 2;
@@ -130,7 +124,8 @@ namespace Cel.CelestialMechanics.Domain.Entities
         public void CalcularCoordenadaX()
         {
             var part1 = Math.Cos(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira);
-            var part2 = Math.Sin(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Cos(InclinacaoPlanoOrbitalTerra);
+            var part2 = Math.Sin(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
+                        * Math.Cos(InclinacaoPlanoOrbitalTerra);
 
             CoordenadaX = DistanciaPlanetaSol.UaToKm() * (part1 - part2);
         }
@@ -138,14 +133,16 @@ namespace Cel.CelestialMechanics.Domain.Entities
         public void CalcularCoordenadaY()
         {
             var part1 = Math.Sin(LongitudeNodoAscendente) * Math.Cos(ArgumentoPerielio + AnomaliaVerdadeira);
-            var part2 = Math.Cos(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Cos(InclinacaoPlanoOrbitalTerra);
+            var part2 = Math.Cos(LongitudeNodoAscendente) * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
+                        * Math.Cos(InclinacaoPlanoOrbitalTerra);
 
             CoordenadaY = DistanciaPlanetaSol.UaToKm() * (part1 + part2);
         }
 
         public void calcularCoordenadaZ()
         {
-            CoordenadaZ = DistanciaPlanetaSol.UaToKm() * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira) * Math.Sin(InclinacaoPlanoOrbitalTerra);
+            CoordenadaZ = DistanciaPlanetaSol.UaToKm() * Math.Sin(ArgumentoPerielio + AnomaliaVerdadeira)
+                * Math.Sin(InclinacaoPlanoOrbitalTerra);
         }
 
         public void CalcularCoordenadaLambda()
@@ -160,7 +157,6 @@ namespace Cel.CelestialMechanics.Domain.Entities
         {
             var value = Math.Atan(CoordenadaZ /
                 Math.Sqrt(Math.Pow(CoordenadaX, 2) + Math.Pow(CoordenadaY, 2)));
-
 
             // TODO verificar se é necessária essa conversão 
             CoordenadaBeta = value.RadToGraus();
